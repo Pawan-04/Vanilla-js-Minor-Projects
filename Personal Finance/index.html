@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="dash">Dasboard💹</h1>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search...">
+            <span class="search-icon">🔍</span>
+        </div>
+        <div class=profile>
+            <h1>😎</h1>
+            <div id="profil-inner">
+                <h4>Hello🖐️</h4>
+                <h2>Pawan</h2>
+            </div>
+        </div>
+
+    </header>
+    <section class="form-page">
+        <form action="" id="form">
+            <input type="text" placeholder="Title {eg: movie,food}" id="title" required>
+            <input type="number" placeholder="amount" id="amount" required>
+            <input type="text" placeholder="note" id="note">
+
+            <select id="category">
+                <option value="Kathi">Kathi</option>
+                <option value="Sothern">Southern</option>
+                <option value="Tuckshop">Tuckshop</option>
+                <option value="Hotspot">Hotspot</option>
+                <option value="Friends">Freinds</option>
+            </select>
+
+            <input type="date" id="date" required>
+
+            <div class="radio-group" id="radio-group">
+                <label><input type="radio" name="type" value="Income" required>Income</label>
+                <label><input type='radio' name="type" value="Expense" required>Expense</label>
+            </div>
+
+            <button type="submit">Add Transaction</button>
+        </form>
+    </section>
+
+    <section class="dashboard">
+        <div class="balance common">
+            <h4>Balance🏦</h4>
+            <h1 class ='b'>0</h1>
+        </div>
+        <div class="income common">
+            <h4>Income🤑</h4>
+            <h1 class = 'i'>0</h1>
+        </div>
+        <div class="expenses common">
+            <h4>Expense🛍️</h4>
+            <h1 class="e">0</h1>
+        </div>
+
+    </section>
+
+    <section class="summary">
+
+    </section>
+
+    <section class="transaction">
+        <h1>Transaction Details</h1>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Note</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <!-- <th>Type</th> -->
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Groceries</td>
+                <td>Bought fruits</td>
+                <td>₹500</td>
+                <td>Income</td>
+            </tr>
+        </table>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+<!-- https://i.pinimg.com/1200x/ba/49/d2/ba49d25ce7251c937fb55258ee451f18.jpg -->
+
+</html>
