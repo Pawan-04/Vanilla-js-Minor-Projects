@@ -79,7 +79,8 @@ function details(){
                 <td>${elem.title}</td>
                 <td>${elem.note}</td>
                 <td>${elem.amount}</td>
-                <td>${elem.type}</td>
+                <td style="color:${elem.type === 'Expense' ? 'red' : 'green'}">${elem.type}</td>
+
             </tr>`
     })
     table.innerHTML = x
