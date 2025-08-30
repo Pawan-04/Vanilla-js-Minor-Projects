@@ -14,7 +14,22 @@ let b = document.querySelector('.b');
 let i = document.querySelector('.i');
 let e = document.querySelector('.e');
 
+let myChart;
+let totalCha;
 let transaction = [];
+// Load from localStorage or start with an empty array
+transaction = JSON.parse(localStorage.getItem('transaction')) || [];
+
+function updateUI(){
+
+    details();
+    dashboard();
+    charts();
+
+}
+updateUI()
+
+
 
 
 
@@ -26,7 +41,7 @@ class Transaction{
         this.category = category;
         this.date = date;
         this.type = type;
-        console.log(this)
+        // console.log(this)
     }
 
 
@@ -37,10 +52,14 @@ btn.addEventListener('click',function(e){
     let type = document.querySelector('input[name="type"]:checked')
     let obj = new Transaction(title.value,amount.value,note.value,category.value,date.value,type.value) 
     transaction.push(obj)
+    
+    saveToLocalStorage();
 
+ 
     details();
     dashboard();
-
+    charts();
+    // totalChart();
 
 })
 
@@ -92,5 +111,132 @@ balance = parseInt(balance)
     e.innerHTML = parseInt(expen);
     b.innerHTML = parseInt(balance);
 
+    totalChart([inc,expen,balance])
+
 }
+
+
+
+function charts(){
+
+    let expenseTotal = {
+        Kathi: 0,
+        Sothern: 0,
+        Tuckshop:0,
+        Friends:0,
+        Hotspot:0,
+    }
+
+    transaction.forEach(function(obj){
+        if(obj.type === "Expense" && expenseTotal.hasOwnProperty(obj.category)){
+            expenseTotal[obj.category] += parseInt(obj.amount);
+        }
+    })
+    
+    const labels = Object.keys(expenseTotal)
+    const data = Object.values(expenseTotal)
+
+
+    // 2. Get the canvas element from your HTML
+    const ctx = document.getElementById('myExpenseChart').getContext('2d');
+
+    if(myChart){
+        myChart.destroy();
+    }
+
+    // 3. Create a new chart object
+    myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            // FIX 2: Pass the 'labels' variable you created above
+            labels: labels,
+            datasets: [{
+                label: 'Expenses',
+                data: data,
+backgroundColor: [
+    '#003f5c', // Deep Slate Blue
+    '#444e86', // Muted Purple
+    '#955196', // Dusty Magenta
+    '#dd5182', // Rich Coral
+    '#ff6e54', // Bright Terracotta
+    '#ffa600'  // Golden Amber
+],
+                hoverOffset: 4
+            }]
+        }
+    });
+
+
+}
+
+
+
+function totalChart(total) {
+    let summary = {
+        Income: total[0],
+        Expense: total[1],
+        Balance: total[2]
+    };
+
+    const labels = Object.keys(summary);
+    const data = Object.values(summary);
+    const ctx = document.getElementById('TotalSummary').getContext('2d');
+
+    if (totalCha) {
+        totalCha.destroy();
+    }
+
+    totalCha = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total Summary (₹)',
+                data: data,
+                backgroundColor: ['#4BC0C0', '#FF6384', '#36A2EB'],
+                borderWidth: 1
+            }]
+        },
+        // --- PASTE THE NEW OPTIONS BLOCK HERE ---
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    grid: {
+                        color: function(context) {
+                            if (context.tick.value === 0) {
+                                return '#343a40';
+                            }
+                            return 'rgba(0, 0, 0, 0.1)';
+                        },
+                        lineWidth: function(context) {
+                            if (context.tick.value === 0) {
+                                return 2;
+                            }
+                            return 1;
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+
+/** Saves the current transactions array to local storage. */
+function saveToLocalStorage() {
+    // Convert the array of objects to a JSON string
+    const transactionsJson = JSON.stringify(transaction);
+    
+    // Save the string in localStorage with a key named 'transactions'
+    localStorage.setItem('transaction', transactionsJson);
+}
+
 

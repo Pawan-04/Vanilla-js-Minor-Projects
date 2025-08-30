@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -35,7 +36,7 @@
                 <option value="Sothern">Southern</option>
                 <option value="Tuckshop">Tuckshop</option>
                 <option value="Hotspot">Hotspot</option>
-                <option value="Friends">Freinds</option>
+                <option value="Friends">Friends</option>
             </select>
 
             <input type="date" id="date" required>
@@ -52,11 +53,11 @@
     <section class="dashboard">
         <div class="balance common">
             <h4>Balance🏦</h4>
-            <h1 class ='b'>0</h1>
+            <h1 class='b'>0</h1>
         </div>
         <div class="income common">
             <h4>Income🤑</h4>
-            <h1 class = 'i'>0</h1>
+            <h1 class='i'>0</h1>
         </div>
         <div class="expenses common">
             <h4>Expense🛍️</h4>
@@ -66,6 +67,14 @@
     </section>
 
     <section class="summary">
+
+        <div>
+            <canvas id="myExpenseChart"></canvas>
+            <h2>Expense Data</h2>
+        </div>
+<div style="width: 500px;">
+  <canvas id="TotalSummary"></canvas>
+</div>
 
     </section>
 
